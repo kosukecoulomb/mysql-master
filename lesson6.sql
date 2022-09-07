@@ -115,3 +115,66 @@ INSERT INTO users VALUES (4,'Smith','smith@hotmail.com',58);
 ALTER TABLE users DROP INDEX email;
 
 SELECT * FROM users;
+
+SET autocommit = 0;
+
+UPDATE users SET id = 5 WHERE id = 1;
+
+ROLLBACK;
+
+UPDATE users SET id = 5 WHERE id = 1;
+
+COMMIT;
+
+ROLLBACK;
+
+SET autocommit = 1;
+
+START TRANSACTION;
+
+UPDATE users SET id = 5 WHERE id = 1;
+
+ROLLBACK;
+
+SELECT * FROM users;
+
+CREATE INDEX index_name ON users(name);
+
+CREATE TABLE products
+	(
+		id INT(10),
+        category VARCHAR(255) NOT NULL,
+        price INT(20) NOT NULL,
+        PRIMARY KEY (id)
+	);
+
+INSERT INTO products (id, price)
+VALUES (1, 1000);
+
+INSERT INTO products (id, category, price)
+VALUES (2, "", 1000);
+
+INSERT INTO products (id, category, price)
+VALUES (3, NULL, 1000);
+
+SELECT * FROM products;
+
+ALTER TABLE users
+MODIFY email varchar(255) NOT NULL;
+
+ALTER TABLE users
+CHANGE COLUMN age age2 INT(3) NOT NULL;
+
+DROP TABLE products;
+
+CREATE TABLE products
+(
+	id INT(10),
+    category VARCHAR(255) NOT NULL DEFAULT 'Not Categorized',
+    price INT(20) NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO products (id) VALUES(1);
+
+SELECT * FROM products;
