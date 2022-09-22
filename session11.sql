@@ -170,3 +170,67 @@ SELECT DATE_FORMAT('2020-10-22', '%c');
 SELECT DATE_FORMAT('2020-10-22', '%d');
 
 SELECT CONVERT_TZ('2020-10-1 06:34:24', 'Asia/Tokyo', 'America/New_York');
+
+SELECT DATABASE();
+
+SELECT CURRENT_USER();
+
+SELECT VERSION();
+
+SELECT CHARSET('Abbbrc');
+
+SELECT COLLATION('Abbbrc');
+
+SELECT DEFAULT(id) FROM users;
+
+SELECT CAST(NOW() AS signed);
+
+SELECT CONVERT(NOW(), signed);
+
+SELECT CONVERT(id, DECIMAL(5, 3)) FROM users;
+
+USE ecsite;
+
+
+SELECT 
+    product_id, SUM(amount) AS sum_amount
+FROM
+    order_details
+GROUP BY product_id
+ORDER BY sum_amount DESC;
+
+
+SELECT 
+    product_id, 
+    SUM(amount) AS sum_amount,
+    AVG(amount) AS avg_amount,
+    MAX(amount) AS max_amount,
+    MIN(amount) AS min_amount
+FROM
+    order_details
+GROUP BY product_id
+ORDER BY sum_amount DESC;
+
+
+SELECT 
+    product_id, 
+    CAST(CONCAT('製品 ID','product_id', 'の商品の総注文量は', SUM(amount),'です。') AS CHAR) AS sum_amount
+FROM
+    order_details
+GROUP BY product_id
+ORDER BY sum_amount DESC;
+
+
+CREATE TABLE case4
+(
+	id int(10) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+INSERT INTO case4(name) VALUES ('Andy'), ('Mary'), ('Sam');
+
+SELECT * FROM case4;
+
+
+SELECT UPPER(REPLACE(name, name, 'Mr.Andy')) FROM case4 WHERE name = 'Andy';
